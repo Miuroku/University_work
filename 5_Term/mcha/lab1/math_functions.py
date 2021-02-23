@@ -4,7 +4,7 @@ import numpy.linalg as la
 import base_functions as bf
 
 # represents how many values we'll around in values.
-around_value = 5
+around_value = 4
 
 # Checks if there's a possible solve.
 def checkSolve(a1_array, b1_array):
@@ -97,7 +97,7 @@ def gauss2(a1_array, b1_array, debug=False):
                 max_el = [arr[k][row], k]   # [0] - stores the value.
                                             # [1] - stores number of string of this element.
                 for i in range(k, n):
-                    if arr[i][row] > max_el[0]:
+                    if abs(arr[i][row]) > max_el[0]:
                         max_el[0] = arr[i][row]
                         max_el[1] = i
 

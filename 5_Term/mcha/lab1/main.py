@@ -17,7 +17,7 @@ def main():
     print()
 
     # Setup printoptions.
-    np.set_printoptions(precision=5, suppress=True, floatmode="fixed")
+    np.set_printoptions(precision=mf.around_value, suppress=True, floatmode="fixed")    
 
     # main logic.
     if not  mf.checkSolve(a_array, b_array):
