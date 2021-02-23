@@ -5,6 +5,9 @@ import numpy as np
 
 def main():
 
+    # user input.
+    debug = bf.get_debug_info()
+
     # load data.
     a_array = odata.a_array[0]
     b_array = odata.b_array[0]
@@ -24,13 +27,15 @@ def main():
         print("")
     else:    
         # 1-st gauss.
-        gaussAnswer = mf.gauss1(a_array, b_array)
+        gaussAnswer = mf.gauss1(a_array, b_array, debug[0])
         print(f"Our Answer 1: -------------------\n{gaussAnswer}")
 
         # 2-nd gauss.        
-        gaussAnswer2 = mf.gauss2(a_array, b_array)
-        print(f"Our Answer 2: -------------------\n{gaussAnswer}")
+        gaussAnswer2 = mf.gauss2(a_array, b_array, debug[1])
+        print(f"Our Answer 2: -------------------\n{gaussAnswer2}")
 
         # 3-d gauss
+        #gaussAnswer3 = mf.gauss3(a_array, b_array, debug[2])
+        #print(f"Our Answer 3: -------------------\n{gaussAnswer3}")
 
 main()
