@@ -12,10 +12,12 @@ def get_debug_info():
             if usr_input2 == 'y':
                 debug.append(True)
             else:
-                debug.append(False)
-        return debug
+                debug.append(False)        
     else:
-        return None
+        for i in range(0, 3):
+            debug.append(False)
+            
+    return debug
 
 def debugOutput(a1_array, b1_array):
     a_array = np.copy(a1_array)
