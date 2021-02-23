@@ -3,6 +3,9 @@ import numpy.linalg as la
 
 import base_functions as bf
 
+# represents how many values we'll around in values.
+around_value = 5
+
 # Checks if there's a possible solve.
 def checkSolve(a1_array, b1_array):
     
@@ -47,8 +50,8 @@ def gauss1(a1_array, b1_array, debug=False):
                 for c in range(n): # run on string.           
                     a_array[i][c] -= a_array[k][c] * q                             
                 b_array[i] -= b_array[k] * q
-            a_array = np.around(a_array, decimals=4)
-            b_array = np.around(b_array, decimals=4)
+            a_array = np.around(a_array, decimals=around_value)
+            b_array = np.around(b_array, decimals=around_value)
 
             if debug:
                 print(f"iteration no. {k}")     
@@ -67,7 +70,7 @@ def gauss1(a1_array, b1_array, debug=False):
                 rightpart += a_array[ik][k] * x_array[k]
             x_array[ik] = (b_array[ik] - rightpart) / a_array[ik][ik]
 
-        x_array = np.around(x_array, decimals=4)
+        x_array = np.around(x_array, decimals=around_value)
 
         if debug:
             print(f"x_array[{ik}] = {x_array[ik]}")
@@ -130,8 +133,8 @@ def gauss2(a1_array, b1_array, debug=False):
                 for c in range(n): # run on string.           
                     a_array[i][c] -= a_array[k][c] * q                             
                 b_array[i] -= b_array[k] * q
-            a_array = np.around(a_array, decimals=4)
-            b_array = np.around(b_array, decimals=4)
+            a_array = np.around(a_array, decimals=around_value)
+            b_array = np.around(b_array, decimals=around_value)
 
             if debug:
                 print(f"iteration no. {k}")     
@@ -150,7 +153,7 @@ def gauss2(a1_array, b1_array, debug=False):
                 rightpart += a_array[ik][k] * x_array[k]
             x_array[ik] = (b_array[ik] - rightpart) / a_array[ik][ik]
 
-        x_array = np.around(x_array, decimals=4)
+        x_array = np.around(x_array, decimals=around_value)
 
         if debug:
             print(f"x_array[{ik}] = {x_array[ik]}")
