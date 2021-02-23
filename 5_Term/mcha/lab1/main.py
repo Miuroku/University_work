@@ -5,8 +5,8 @@ import base_functions as bf
 def main():
 
     # load data.
-    a_array = odata.a_array
-    b_array = odata.b_array
+    a_array = odata.a_array[1]
+    b_array = odata.b_array[1]
 
     # print source data.
     print("our a_array : ")
@@ -23,7 +23,9 @@ def main():
         gaussAnswer = mf.gauss1(a_array, b_array)
         print(f"Our Answer 1: -------------------\n{gaussAnswer}")
 
-        # 2-nd gauss.
+        # 2-nd gauss.        
+        gaussAnswer2 = mf.gauss2(a_array, b_array)
+        print(f"Our Answer 2: -------------------\n{gaussAnswer}")
 
         # 3-d gauss
 
