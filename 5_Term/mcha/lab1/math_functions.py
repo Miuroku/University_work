@@ -96,7 +96,7 @@ def gauss2(a1_array, b1_array, debug=False):
                 max_el = list()
                 max_el = [arr[k][row], k]   # [0] - stores the value.
                                             # [1] - stores number of string of this element.
-                for i in range(k, n):
+                for i in range(k+1, n):
                     if abs(arr[i][row]) > max_el[0]:
                         max_el[0] = arr[i][row]
                         max_el[1] = i
@@ -105,14 +105,19 @@ def gauss2(a1_array, b1_array, debug=False):
             else:
                 return False
         
-        def swap_strings_in_matrix(matrix ,current_str, string_to_change):
-            temp = np.copy(matrix[current_str])            
-            matrix[current_str] = np.copy(matrix[string_to_change])
-            matrix[string_to_change] = np.copy(temp)
+        def swap_strings_in_matrix(a_matrix, b_matrix, current_str, string_to_change):
+            # Swap in a_matrix.
+            temp1 = np.copy(a_matrix[current_str])            
+            a_matrix[current_str] = np.copy(a_matrix[string_to_change])
+            a_matrix[string_to_change] = np.copy(temp1)
+            # Swap in b_matrix.
+            temp2 = np.copy(b_matrix[current_str])
+            b_matrix[current_str] = np.copy(b_matrix[string_to_change])
+            b_matrix[string_to_change] = np.copy(temp2)
 
         max_str = get_string_with_max_el_in_row(a_array, k)
         if k!=max_str:
-            swap_strings_in_matrix(a_array, k, max_str)
+            swap_strings_in_matrix(a_array, b_array, k, max_str)
 
         if debug:
             print("------------------")
