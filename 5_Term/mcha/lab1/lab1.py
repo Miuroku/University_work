@@ -67,21 +67,26 @@ def gauss1(a1_array, b1_array):
                 for c in range(n): # run on string.           
                     a_array[i][c] -= a_array[k][c] * q                             
                 b_array[i] -= b_array[k] * q
+            a_array = np.around(a_array, decimals=4)
+            b_array = np.around(b_array, decimals=4)
             print(f"iteration no. {k}")     
             debugOutput(a_array, b_array)           
 
     # Обратный ход. <--------------------------------------Error here somwhere .
+    # Incorrect calculating of x[0] // Самый первый (на последнем шаге) икс не правильно считается.
     # Иду от последней строки треугольной матрицы к первой. [n-1,0]. 
+    # ik - number of current string.
     for ik in range(n-1, -1, -1):        
         # x_array[k] = (b_array[k] - rightpart)/a_array[k][k].        
         if ik == n-1:
             x_array[ik] = (b_array[n-1]) / a_array[ik][ik]
         else:
             rightpart = 0
-            for k in range(ik, -1, -1): # <---------------- Here the cycle sucks .
-                rightpart += a_array[ik][k+1] * x_array[k+1]               
+            for k in range(ik+1, n): # <---------------- Here the cycle sucks .
+                rightpart += a_array[ik][k] * x_array[k] # <-----------rightpart wrong value. As a result there'll be a wrong x[0].                                                                           
             x_array[ik] = (b_array[ik] - rightpart) / a_array[ik][ik]
 
+        x_array = np.around(x_array, decimals=4)
         print(f"x_array[{ik}] = {x_array[ik]}")
 
     return x_array
@@ -142,22 +147,43 @@ b_array = np.array(
     [  4.2, 4.2, 4.2, 4.2, 4.2]
 )
 
-a_test = np.array(
-    [
+# Some tests.
+#    test1 (answer: [1, -4])
+a_test1 = np.array([
+    [1, -1],
+    [2, 1]
+]) 
+b_test1 = np.array([
+    -5, -7
+])
+
+# test2 (answer: [3, 5, 4])
+a_test2 = np.array([
         [3., 2, -5],
         [2, -1, 3],
         [1, 2, -1]
-    ]
+])
+b_test2 = np.array(
+    [-1., 13, 9]
 )
 
-b_test = np.array(
-    [-1, 13, 9]
-)
+# test3 (answer: [])
+a_test3 = np.array([
+    []
+])
+b_test3 = ([
+    
+])
+
+print("our a_array : ")
+print2DArray(a_test)
+print("our b_array : ")
+printArray(b_test)
+print()
 
 if checkSolve(a_test, b_test) == False:
     print("")
-else:
-    print2DArray(a_array)
+else:    
     # 1-st gauss.
     gaussAnswer = gauss1(a_test, b_test)
     print(f"Our Answer 1: -------------------\n{gaussAnswer}")
@@ -165,15 +191,3 @@ else:
     # 2-nd gauss.
 
     # 3-d gauss
-
-    # My A array:
-    # 5 x 5
-    # 5.13	0.81	3.47	0.92	-0.53
-    # -0.53	5.13	0.81	3.47	0.92
-    # 3.72	-0.53	5.13	0.81	3.47
-    # 0.67	3.72	-0.53	5.13	0.81
-    # 0.81	0.67	3.72	-0.53	5.13
-
-    # My B array: 
-    # 5
-    # 4,2   4,2  4,2  4,2  4,2 
