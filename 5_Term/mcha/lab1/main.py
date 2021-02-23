@@ -5,8 +5,8 @@ import base_functions as bf
 def main():
 
     # load data.
-    a_array = odata.a_test2
-    b_array = odata.b_test2
+    a_array = odata.a_array
+    b_array = odata.b_array
 
     # print source data.
     print("our a_array : ")

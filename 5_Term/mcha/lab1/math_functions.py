@@ -36,7 +36,7 @@ def gauss1(a1_array, b1_array, debug=False):
     # Прямой ход. Состоит из n-1 шага.
     for k in range(0, n-1):                                 # k - номер итерации.      
         if a_array[k][k] == 0:
-            print(f'1-st method could not be used, cuz A[{k}][{k}] = 0 on step ')
+            print(f'1-st method could not be used, cuz A[{k}][{k}] == 0 on step ')
             return False
         else:
             # Считаем главные элементы k-го шага.             
@@ -54,8 +54,7 @@ def gauss1(a1_array, b1_array, debug=False):
                 print(f"iteration no. {k}")     
                 bf.debugOutput(a_array, b_array)           
 
-    # Обратный ход. <--------------------------------------Error here somwhere .
-    # Incorrect calculating of x[0] // Самый первый (на последнем шаге) икс не правильно считается.
+    # Обратный ход.    
     # Иду от последней строки треугольной матрицы к первой. [n-1,0]. 
     # ik - number of current string.
     for ik in range(n-1, -1, -1):        
@@ -64,8 +63,8 @@ def gauss1(a1_array, b1_array, debug=False):
             x_array[ik] = (b_array[n-1]) / a_array[ik][ik]
         else:
             rightpart = 0
-            for k in range(ik+1, n): # <---------------- Here the cycle sucks .
-                rightpart += a_array[ik][k] * x_array[k] # <-----------rightpart wrong value. As a result there'll be a wrong x[0].                                                                           
+            for k in range(ik+1, n):
+                rightpart += a_array[ik][k] * x_array[k]
             x_array[ik] = (b_array[ik] - rightpart) / a_array[ik][ik]
 
         x_array = np.around(x_array, decimals=4)
