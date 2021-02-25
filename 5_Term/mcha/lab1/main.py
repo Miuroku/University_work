@@ -35,7 +35,7 @@ def main():
         print(f"Our Answer 2: -------------------\n{gaussAnswer2}")
 
         # 3-d gauss
-        #gaussAnswer3 = mf.gauss3(a_array, b_array, debug[2])
-        #print(f"Our Answer 3: -------------------\n{gaussAnswer3}")
+        gaussAnswer3 = mf.gauss3(a_array, b_array, debug[2])
+        print(f"Our Answer 3: -------------------\n{gaussAnswer3}")
 
 main()
