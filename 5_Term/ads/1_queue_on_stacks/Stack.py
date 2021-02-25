@@ -16,8 +16,11 @@ class Stack:
         self.stack.append(new_element_of_stack)
     
     def pop(self):
-        upper_element = self.stack.pop()
-        return upper_element[0]
+        if len(self.stack) == 0:
+            return None
+        else:
+            upper_element = self.stack.pop()
+            return upper_element[0]
     
     def get_min(self):
         if len(self.stack) != 0:

@@ -10,9 +10,9 @@ class Queue:
     
     def pop(self):
         upper_element = None
-        if len(self.stack2) == 0:
+        if len(self.stack2.stack) == 0:
             # Move all the elements from "stack1" to "stack2".
-            while len(self.stack1) != 0:
+            while len(self.stack1.stack) != 0:
                 temp_element = self.stack1.pop()
                 self.stack2.push(temp_element)
         upper_element = self.stack2.pop()
