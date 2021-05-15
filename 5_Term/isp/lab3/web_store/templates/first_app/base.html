@@ -110,16 +110,14 @@
           
           const enterTime = sessionStorage.getItem('startTime')
           
+          
           const showPopup = () => {
+
             let currentTime = Date.now()
             let spentTime = (currentTime - enterTime) / 1000
-            if (spentTime >= 60) {
-              clearInterval(timer);
-              let message = `Вы провели на сайте минут: ${Math.floor(spentTime / 60)}, секунд: ${Math.floor(spentTime % 60)}`;
-              //alert(message);
-              /* выводим текущую дату и время на сайт в блок с id "current_date_time_block" */
-              document.getElementById('current_date_time_block').innerHTML = message;          
-            }            
+            let message = `Вы провели на сайте минут: ${Math.floor(spentTime / 60)}, секунд: ${Math.floor(spentTime % 60)}`;
+            document.getElementById('current_date_time_block').innerHTML = message;          
+      
           }
           
           const timer = setInterval(showPopup, 100)                
