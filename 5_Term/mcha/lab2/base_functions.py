@@ -21,13 +21,13 @@ def print2DArray(arr):
         print("     ", end='')        
         for j in range(len(arr[i])):
             print(str(arr[i][j]) + " ",end='')
-        print('')
+        print('\n')
 
 def printArray(arr):
     print("     ", end='')        
     for i in range(len(arr)):
         print(str(arr[i]) + ' ', end='')
-    print('')
+    print('\n')
 
 def print_arrays(a_array, b_array):    
     print("our a_array : ")

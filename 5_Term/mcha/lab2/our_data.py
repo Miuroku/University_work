@@ -8,6 +8,7 @@ import numpy as np
 a_array = list()
 b_array = list()
 accuracy = 0.0001
+debug = False   
 
 # main data --------------------------------------------------------------
 # (answer: [0.769	-1.383	-3.298	-0.0603	-0.0325])
@@ -76,5 +77,19 @@ a_array.append(
 b_array.append(
     np.array(
         [5.0, 24.42, 36.0]
+    )
+)
+
+#   test3 (answer: [0.4, -0.0946, -0.54]) *** not really good test.
+a_array.append(
+    np.array([
+        [3.6, 1.8, -4.7],
+        [2.7, -3.6, 1.9],
+        [1.5, 4.5, 3.3]
+    ])
+)
+b_array.append(
+    np.array(
+        [3.8, 0.4, -1.6]
     )
 )

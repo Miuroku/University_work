@@ -10,6 +10,7 @@ def main():
     a_array = odata.a_array[0]
     b_array = odata.b_array[0]
     accuracy = odata.accuracy
+    debug = odata.debug
 
     # Setup print options.
     np.set_printoptions(precision=mf.around_value-1, suppress=True, floatmode="fixed")
@@ -22,11 +23,13 @@ def main():
         return
     else:
         # 1-st method (Метод простых итераций).
-        x_answers = mf.get_solutions_simple_iterations(a_array, b_array, accuracy)
-        print("Our Answer : ------------------------------")
-        bf.printArray(x_answers)
+        x_answers1 = mf.get_solutions_simple_iterations(a_array, b_array, accuracy, debug)
+        print("Our Answer 1 : ------------------------------")
+        bf.printArray(x_answers1)
 
         # 2-nd method (Метод Зейделя).
-        
+        x_answers2 = mf.get_solutions_Seidel_method(a_array, b_array, accuracy, debug)
+        print("Our Answer 2 : ------------------------------")
+        bf.printArray(x_answers2)
 
 main()

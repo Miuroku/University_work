@@ -58,7 +58,6 @@ def get_normal_SLAU_system(a1_array, b1_array,debug=False):
 # 2-nd step.
 # Убедиться что нормальная система удовлетворяет условиям сходимости итерационного процесса.
 def check_convergence_conditions(normal_system_array1):
-    
     normal_system_array = np.copy(normal_system_array1)
     n = len(normal_system_array)
     sum_array = np.arange(n)
@@ -68,6 +67,25 @@ def check_convergence_conditions(normal_system_array1):
             sum_array[i] += abs(normal_system_array[i][j])
     max_value = np.max(sum_array)
     if max_value <= 1:
+        return True
+    else:
+        return False
+
+# Проверяет достигнута ли нужная точность в вычислениях.
+# Смотрит разницу между итерациями (x_array_for_calc-последняя и x_array_for_get-предыдущая).    
+def check_stop_condition(x_array_for_calc1, x_array_for_get1, accuracy):
+    x_array_for_get = np.copy(x_array_for_get1)
+    x_array_for_calc = np.copy(x_array_for_calc1)
+    n = len(x_array_for_calc)
+    difference = np.arange(n)
+    difference = np.zeros_like(difference, dtype=float)
+    result_count = 0
+    result = False
+    for i in range(0, n):
+        difference[i] = abs(abs(x_array_for_calc[i]) - abs(x_array_for_get[i]))
+        if difference[i] <= accuracy:
+            result_count += 1
+    if result_count == n:
         return True
     else:
         return False
@@ -85,46 +103,28 @@ def get_solutions_simple_iterations(a1_array, b1_array, accuracy, debug=False):
     x_array_for_get = np.zeros_like(x_array_for_get, dtype=float)
     x_array_for_calc = np.arange(n)
     x_array_for_calc = np.zeros_like(x_array_for_calc, dtype=float)        
-
+    
     # Подставляет x_array_for_get в normal_system_array.
     # Возвращает массив ответов для записи в x_array_for_calc.
     def get_x_answers(normal_system_array1, x_array_for_get1):
         normal_system_array = np.copy(normal_system_array1)
         x_array_for_get = np.copy(x_array_for_get1)
-        n = len(x_array_for_get)        
+        n = len(x_array_for_get)
         x_array_for_calc = np.arange(n)
         x_array_for_calc = np.zeros_like(x_array_for_calc, dtype=float)
-        for i in range(0, n):
+
+        for i in range(0, n):         
             for j in range(0, n):
                 x_array_for_calc[i] += normal_system_array[i][j] * x_array_for_get[j]
             x_array_for_calc[i] += normal_system_array[i][n] # Adding last element.
-        return x_array_for_calc
-    
-    # Проверяет достигнута ли нужная точность в вычислениях.
-    # Смотрит разницу между итерациями (x_array_for_calc-последняя и x_array_for_get-предыдущая).    
-    def check_stop_condition(x_array_for_calc1, x_array_for_get1, accuracy):
-        x_array_for_get = np.copy(x_array_for_get1)
-        x_array_for_calc = np.copy(x_array_for_calc1)
-        n = len(x_array_for_calc)
-        difference = np.arange(n)
-        difference = np.zeros_like(difference, dtype=float)
-        result_count = 0
-        result = False
-        for i in range(0, n):
-            difference[i] = abs(abs(x_array_for_calc[i]) - abs(x_array_for_get[i]))
-            if difference[i] <= accuracy:
-                result_count += 1
-        if result_count == n:
-            return True
-        else:
-            return False        
-    
+
+            x_array_for_get[i] = x_array_for_calc[i]
+        return x_array_for_get
+
     # main logic.    
     if check_convergence_conditions(normal_system_array):
         iteration_n = 0
-        
         while(True):
-
             if debug:
                 print(f"de : teration № [{iteration_n}]")
 
@@ -141,7 +141,62 @@ def get_solutions_simple_iterations(a1_array, b1_array, accuracy, debug=False):
                 break
             iteration_n += 1
             # Continue iterations.
+        #print(f"iterations : {iteration_n}")
         return np.around(x_array_for_calc, decimals=around_value)
     else:
         print("\n SLAU has not answers ! --------------------------")
-        return Nan
+        return None
+
+# 2-nd method of solvin SLAU. --------------------------------------------------------------------------
+# Метод Зейделя решения СЛАУ.
+def get_solutions_Seidel_method(a1_array, b1_array, accuracy, debug=False):
+
+    # preparation.
+    a_array = np.copy(a1_array)
+    b_array = np.copy(b1_array)
+    normal_system_array = get_normal_SLAU_system(a_array, b_array, debug)
+    n = len(normal_system_array)
+    x_array_for_get = np.arange(n)
+    x_array_for_get = np.zeros_like(x_array_for_get, dtype=float)
+    x_array_for_calc = np.arange(n)
+    x_array_for_calc = np.zeros_like(x_array_for_calc, dtype=float)        
+
+    # Подставляет x_array_for_get в normal_system_array.
+    # Возвращает массив ответов для записи в x_array_for_calc.
+    def get_x_answers(normal_system_array1, x_array_for_get1):
+        normal_system_array = np.copy(normal_system_array1)
+        x_array_for_get = np.copy(x_array_for_get1)
+        n = len(x_array_for_get)
+        x_array_for_calc = np.arange(n)
+        x_array_for_calc = np.zeros_like(x_array_for_calc, dtype=float)
+        for i in range(0, n):
+            for j in range(0, n):
+                x_array_for_calc[i] += normal_system_array[i][j] * x_array_for_get[j]
+            x_array_for_calc[i] += normal_system_array[i][n] # Adding last element.
+        return x_array_for_calc            
+    
+    # main logic.    
+    if check_convergence_conditions(normal_system_array):
+        iteration_n = 0
+        while(True):
+            if debug:
+                print(f"de : teration № [{iteration_n}]")
+
+            x_array_for_calc = get_x_answers(normal_system_array, x_array_for_get)  
+            if check_stop_condition(x_array_for_calc, x_array_for_get, accuracy):                                
+                break         
+            x_array_for_get = np.copy(x_array_for_calc)
+
+            if iteration_n > 200:
+                print("x_calc : ")
+                bf.printArray(x_array_for_calc)
+                print("x_get : ")
+                bf.printArray(x_array_for_get)
+                break
+            iteration_n += 1
+            # Continue iterations.
+        #print(f"iterations : {iteration_n}")
+        return np.around(x_array_for_calc, decimals=around_value)
+    else:
+        print("\n SLAU has not answers ! --------------------------")
+        return None
