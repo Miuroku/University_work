@@ -18,7 +18,7 @@ from django.dispatch import receiver
 
 class Category(models.Model):
 
-    title = models.CharField(max_length=50, verbose_name="Category")    
+    title = models.CharField(max_length=50, verbose_name="title")    
     image = models.ImageField(verbose_name="Изображение", default="default_img.jpg") # default Берётся из папки /media/
     slug = models.SlugField(default='', editable=False, max_length=50, unique=True) 
 
