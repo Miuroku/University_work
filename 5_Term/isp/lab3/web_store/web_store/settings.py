@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
-from decouple import config
 import os
 import my_config
 
@@ -23,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config("SECRET_KEY")
+SECRET_KEY = my_config.SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -96,8 +95,17 @@ WSGI_APPLICATION = 'web_store.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
-DATABASES = my_config.DATABASES
+# Data loaded from ../my_config.py.
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': my_config.DATABASES_NAME,
+        'USER': my_config.DATABASES_USER,
+        'PASSWORD': my_config.DATABASES_PASSWORD,
+        'HOST': my_config.DATABASES_HOST,
+        'PORT': my_config.DATABASES_PORT,
+    }
+}
 
 
 # Password validation
