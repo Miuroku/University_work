@@ -33,15 +33,15 @@ class GetSpecificProductViewTest(TestCase):
             Product.objects.create(title=f'my_product-{product_num}', category=Category.objects.create(title=f'Category-{product_num}'))
     
     def test_view_url_exists_atdesired_location(self):
-        resp = self.client.get(f'/products/{Product.objects.get(pk=1)}/')
+        resp = self.client.get(f'/products/{Product.objects.get(title="my_product-0")}/')
         self.assertEquals(resp.status_code, 200)
 
     def test_view_url_accessible_by_name(self):
-        resp = self.client.get(reverse('specific_product_url_with_slug', args=[Product.objects.get(pk=1)]))
+        resp = self.client.get(reverse('specific_product_url_with_slug', args=[Product.objects.get(title='my_product-0')]))
         self.assertEqual(resp.status_code, 200)
     
     def test_view_uses_correct_template(self):
-        resp = self.client.get(reverse('specific_product_url_with_slug', args=[Product.objects.get(pk=1)]))        
+        resp = self.client.get(reverse('specific_product_url_with_slug', args=[Product.objects.get(title='my_product-0')]))        
         self.assertEqual(resp.status_code, 200)
         self.assertTemplateUsed(resp, 'first_app/specific_product.html')
 
