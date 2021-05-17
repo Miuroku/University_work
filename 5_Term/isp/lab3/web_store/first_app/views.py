@@ -35,8 +35,9 @@ def get_specific_product(request, slug):
 
     product = Product.objects.get(slug=slug)  
 
-    # Collect statistics.
-    StatisticsItem.add_click(user=request.user, product=product)
+    # Collect statistics from user.
+    if request.user.is_authenticated:
+        StatisticsItem.add_click(user=request.user, product=product)
 
     cart_product_form = CartAddProductForm()
     context = {'product': product,
