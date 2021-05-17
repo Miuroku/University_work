@@ -5,7 +5,9 @@ from django.utils import timezone
 from .models import Coupon
 from .forms import CouponApplyForm
 
+import logging
 
+logger = logging.getLogger(__name__)
 
 @require_POST
 def coupon_apply(request):
@@ -21,6 +23,7 @@ def coupon_apply(request):
                                         active=True)
             # Сохраняем в сессию идентификатор купона для далнейшего сохранения его в заказе.
             request.session['coupon_id'] = coupon.id
+            logger.info(f'user: {request.user.username}, use coupon: {coupon_id}.')
         except Coupon.DoesNotExist:
             request.session['coupon_id'] = None        
     return redirect('cart:cart_detail')

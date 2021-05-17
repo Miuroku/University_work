@@ -20,6 +20,10 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text, DjangoUnicodeDecodeError
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 
+# Create logger.
+import logging
+logger = logging.getLogger(__name__)
+
 def get_products_page(request):
     # Обрабатываю параметры строки запроса с именем "category".
     choosen_category = request.GET.get("category", "")    
@@ -48,7 +52,6 @@ def get_about_us(request):
     return render(request, "first_app/about_us.html", {})
 
 def get_categories(request):
-
     categories = Category.objects.all()
     return render(request, "first_app/categories.html", {'categories': categories})
 
@@ -71,9 +74,11 @@ def loginPage(request):
                     return render(request, 'first_app/login.html', context)   
             else:
                 messages.error(request, 'Email was not verifyed yet !')
+                logger.warning('user tries to login with no verified email')
                 return redirect('login_url')
         except Exception as e:
             messages.error(request, 'no user with such username')
+            logger.info('user enter wrong username')
             return redirect('login_url')
     else:
         context = {} 
@@ -180,6 +185,7 @@ def set_balance(request):
         try:
             suc_message = user.wallet.set_balance(500)                       
             messages.success(request, suc_message)
+            logger.info(f'user: {user.username}, set {500}$')
         except Exception as e:
             messages.error(request, str(e))
 
