@@ -6,6 +6,10 @@ import numpy as np
 from django.contrib import messages
 
 from recommendations.recommendations_logic.predictions_logic import get_recommendations, DEBUG, Independent_Prediction_Element
+from recommendations.adapter import Recomendations_Django_Adapter, product_with_prediction
+import logging
+
+logger = logging.getLogger(__name__)
 
 def recommendations(request):
     
@@ -13,56 +17,29 @@ def recommendations(request):
     users = User.objects.all()
     current_user = request.user
     products = Product.objects.all()
-    
-    data = []
 
-    if DEBUG:
-        print('USERS:')
+    # Using adapter here for correct converting data form django DB to recommendations app and back.
+    adapter = Recomendations_Django_Adapter()
     current_user_index = -1
-    for i in range(len(users)):
-        new_line = []
-        # вычисляем индекс текущего пользователя.
-        if users[i] == current_user:
-            current_user_index = i
-        for j in range(len(products)):
-            new_element = StatisticsItem.objects.get(user=users[i], product=products[j])
-            new_line.append(new_element.clicks)
-        if DEBUG:
-            print(f'users[{i}] = (name: {users[i].username}); (id: {users[i].id})')
-        data.append(new_line)
-    data_new = np.copy(data)
-    if DEBUG:
-        print('PRODUCTS:')  
-        for i in range(len(products)):
-            print(f'products[{i}] = (name: {products[i].title}); (id: {products[i].id})')
-        print(f'CURRENT_USER_INDEX: {current_user_index}')
+    data_new = adapter.from_users_products_statistics_to_matrix(users=users, current_user=current_user, products=products, current_user_index=current_user_index)    
 
     try:
         product_recommendations = get_recommendations(data_new, current_user_index, k=2)
     except Exception as ex:
+        logger.error('recommendations was not get')
         messages.error(request, 'error: ' + str(ex))
 
     if DEBUG:
-        print('RECOMMENDETIONS GETED.')
+        logger.info('Recommendations geted !')            
 
     # Gettin related products.
-    products_recommended = []
-    for i in range(len(product_recommendations)):
-        index = product_recommendations[i].j_product
-        current_product = products[index]
-        test_object = product_with_prediction(product_recommendations[i], current_product)
-        products_recommended.append(test_object)
+    products_recommended = adapter.from_predictions_to_django(product_recommendations=product_recommendations, products=products)
 
     if DEBUG:
         try:
-            print(f'PRODUCTS RECOMMENDED: {products_recommended[0].pred_obj.prediction}')
+            logger.debug(f'PRODUCTS RECOMMENDED: {products_recommended[0].pred_obj.prediction}')            
         except:
-            print(f'kek')
+            logger.warning('THERE IS NO PRODUCTS FOR RECOMMENDATION!')         
 
     context = {'pe': product_recommendations, 'products': products_recommended}
     return render(request, 'recommendations/recommendations.html', context=context)
-
-class product_with_prediction(object):
-    def __init__(self, prediction_obj, product):
-        self.pred_obj = prediction_obj
-        self.product = product

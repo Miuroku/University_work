@@ -25,7 +25,7 @@ class Independent_Prediction_Element(object):
         self.j_product = j_product 
 
 '''
- - 'data'           - 2-d matrix.                       (strings - users ; rows - items)
+ - 'data'           - 2-d matrix.                       (strings - users ; rows - items ; statistics items inside)
  - 'user_position'  - number of string with required user
  - 'k'              - make predictions using first 'k' amount of similar users for our user. 
  RETURNS: sorted list of 'Independent_Prediction_Element' with highest prediction value in the begin.
