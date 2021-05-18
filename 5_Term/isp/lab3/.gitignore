@@ -1,3 +1,4 @@
 web_store/my_config.py
 __pycache__
 web_store/debug.log
+.coverage
