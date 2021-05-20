@@ -95,13 +95,14 @@ def add_new_product_to_all_statistics_items(sender, instance, created, **kwargs)
 @receiver(post_save, sender=OrderItem)
 def add_times_was_in_orders(sender, instance, created, **kwargs):
     if created:     
-        StatisticsItem.add_times_was_in_order(
-            user=instance.order.user,
-            product=instance.product)
-        StatisticsItem.add_amount_was_in_order(
-            user=instance.order.user,
-            product=instance.product
-        )
+        if instance.order.user != None:
+            StatisticsItem.add_times_was_in_order(
+                user=instance.order.user,
+                product=instance.product)
+            StatisticsItem.add_amount_was_in_order(
+                user=instance.order.user,
+                product=instance.product
+            )
         
 
         
