@@ -3,7 +3,7 @@ from .forms import OrderCreateForm
 from .models import OrderItem, Order
 from django.contrib import messages
 from cart.cart import Cart
-
+import concurrent.futures
 
 
 def order_create(request):
@@ -57,8 +57,18 @@ def order_specific(request, order_id):
     '''
     Даже аноним сможет получить эту информацию
     '''
+    order = None
+    order_items = None
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        order_future = executor.submit(get_object_or_404, Order, id=order_id)
+        order = order_future.result()
+        order_items_furure = executor.submit(OrderItem.objects.filter, order=order)
+        order_items = order_items_furure.result()
+
+    '''
     order = get_object_or_404(Order, id=order_id)
     order_items = OrderItem.objects.filter(order=order)
+    '''
     context = {'order': order, 'order_items': order_items}
 
     return render(request, 'orders/order/order.html', context)

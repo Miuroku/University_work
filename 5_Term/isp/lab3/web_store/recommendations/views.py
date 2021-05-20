@@ -9,14 +9,26 @@ from recommendations.recommendations_logic.predictions_logic import get_recommen
 from recommendations.adapter import Recomendations_Django_Adapter, product_with_prediction
 import logging
 
+# modul for working with threads.
+import concurrent.futures
+
 logger = logging.getLogger(__name__)
 
 def recommendations(request):
     
     # 1) Convert data to valid format.
-    users = User.objects.all()
+
+    # here i could add threads .
+    users = None
+    products = None
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        users_future = executor.submit(User.objects.all)
+        products_future = executor.submit(Product.objects.all)
+
+        users = users_future.result()
+        products = products_future.result()
+    
     current_user = request.user
-    products = Product.objects.all()
 
     # Using adapter here for correct converting data form django DB to recommendations app and back.
     adapter = Recomendations_Django_Adapter()

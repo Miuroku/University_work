@@ -19,6 +19,7 @@ from django.template.loader import render_to_string
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text, DjangoUnicodeDecodeError
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+import concurrent.futures
 
 # Create logger.
 import logging
@@ -192,8 +193,15 @@ def set_balance(request):
     return redirect('user_profile_url')
 
 def buy_product(request, slug):
-    product = Product.objects.get(slug=slug)  
-    user = User.objects.get(username=request.user.username)
+
+    users = None
+    product = None
+    with concurrent.futures.ThreadPoolExecutor() as executor:
+        product_future = executor.submit(Product.objects.get, slug=slug)
+        user_future = executor.submit(User.objects.get, username=request.user.username)
+
+        product = product_future.result()
+        user = user_future.result()    
 
     if user.is_authenticated:
         try:
