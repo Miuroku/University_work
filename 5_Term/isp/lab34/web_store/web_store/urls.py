@@ -47,6 +47,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('about_us/', main_views.get_about_us, name="about_us_url"),    
     path('', main_views.get_categories, name="home_url"),       
+
+    # API.
+    re_path(r'^api/', include(('orders.api.urls', 'orders_api'), namespace='orders_api')),
 ]
 
 # В режиме дебаг потому что на продакшене так не делают.

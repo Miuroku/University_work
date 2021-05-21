@@ -49,6 +49,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # my installed frameworks.
+    'rest_framework',
+
     # my apps.
     'first_app',
     'cart', 
@@ -159,8 +162,15 @@ STATICFILES_DIRS = (
 
 ALLOWED_HOSTS = ['*']
 
-# Logger settings .
+# rest framework settings.
+# here i could set premissions for API for different groups of users.
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
 
+# Logger settings .
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
