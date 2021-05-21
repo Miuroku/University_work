@@ -20,6 +20,11 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text, DjangoUnicodeDecodeError
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 import concurrent.futures
+import time
+
+# Create threadmanager.
+from first_app.thread_manager import ThreadManager
+thread_manager = ThreadManager()
 
 # Create logger.
 import logging
@@ -42,7 +47,8 @@ def get_specific_product(request, slug):
 
     # Collect statistics from user.
     if request.user.is_authenticated:
-        StatisticsItem.add_click(user=request.user, product=product)
+        thread_manager.add(StatisticsItem.add_click, user=request.user, product=product)
+        #StatisticsItem.add_click(user=request.user, product=product)
 
     cart_product_form = CartAddProductForm()
     context = {'product': product,
@@ -125,7 +131,35 @@ def get_register_page(request):
             profile_test.address=profile_form.cleaned_data.get('address', '')
             profile_test.save()            
 
-            # EMAIL confirmation. ++++++++++++++++++++++++++++++            
+            # EMAIL confirmation. ++++++++++++++++++++++++++++++                   
+            # Test stuff.
+            '''
+            with concurrent.futures.ThreadPoolExecutor() as executor:     
+                uidb64_future = executor.submit(urlsafe_base64_encode, force_bytes(new_user.pk))
+                domain_future = executor.submit(get_current_site, request)
+                uidb64 = uidb64_future.result()
+                domain = domain_future.result().domain
+
+                link = reverse('activate', kwargs={'uidb64': uidb64,
+                                                    'token': my_token_generator.make_token(new_user)})
+                activate_url = 'http://' + domain + link
+
+                email_body = "Hi " + new_user.username + ' Please use this link to verify your account\n' + activate_url + '\n'
+
+                # Some debug stuff.
+                time_after_sending = time.time()
+                email_body += f"""---DEBUG information ---
+                                domain : {domain}
+                                link : {link}
+                                uidb64 : {uidb64} 
+                                time : {time_after_sending - time_before_sending}""" 
+
+                email_subject = 'Activate your shop account.'
+                to_email = user_form.cleaned_data.get('email')
+                email = EmailMessage(email_subject, email_body, settings.EMAIL_HOST_USER, to=[to_email])
+                send_email_future = executor.submit(email.send, fail_silently=False)                
+            '''
+            
             uidb64 = urlsafe_base64_encode(force_bytes(new_user.pk))
             domain = get_current_site(request).domain
             link = reverse('activate', kwargs={'uidb64': uidb64,
@@ -134,16 +168,19 @@ def get_register_page(request):
 
             email_body = "Hi " + new_user.username + ' Please use this link to verify your account\n' + activate_url + '\n'
 
-            # Some debug stuff.
+            # Some debug stuff.            
             email_body += f"""---DEBUG information ---
                             domain : {domain}
                             link : {link}
-                            uidb64 : {uidb64} """ 
+                            uidb64 : {uidb64}""" 
 
             email_subject = 'Activate your shop account.'
             to_email = user_form.cleaned_data.get('email')
             email = EmailMessage(email_subject, email_body, settings.EMAIL_HOST_USER, to=[to_email])
-            email.send(fail_silently=False)
+
+            thread_manager.add(email.send, fail_silently=False)
+            #email.send(fail_silently=False)
+        
 
             # EMAIL confirmation END. ++++++++++++++++++++++++++++++
             username = user_form.cleaned_data.get('username')
