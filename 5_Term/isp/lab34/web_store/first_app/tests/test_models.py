@@ -36,7 +36,7 @@ class CategoryModelTest(TestCase):
     @classmethod
     def setUpTestData(cls):
         #Set up non-modified objects used by all test methods    
-        Category.objects.create(title='Cars')
+        Category.objects.create(title='Cars', pk=1)
 
     def test_title_label(self):
         category = Category.objects.get(pk=1)
