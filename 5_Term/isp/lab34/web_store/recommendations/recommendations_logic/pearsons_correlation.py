@@ -9,7 +9,7 @@ DEBUG = True
                 2) calculates cosines simularities;
     - returns 2-d matrix of centered cosine simularities.
 '''
-def pearsons_correlation(data):
+def pearsons_correlation(data): # pragma: no cover
     sdata = np.copy(data) 
     normalized = normalize_ratings_matrix(sdata)
 
@@ -35,7 +35,7 @@ def pearsons_correlation(data):
     - for each string : находим среднее значение в строке (Mx) и заменяем каждое значение(x) как (x - Mx).
     - returns normalized 2-d matrix.
 '''
-def normalize_ratings_matrix(data):
+def normalize_ratings_matrix(data): # pragma: no cover
     data = np.copy(data)
     res = []
     for i in range(len(data)):
@@ -59,7 +59,7 @@ def normalize_ratings_matrix(data):
 - WARNIN !!!
 - IT COULD HAS nan VALUES CUZ IAM NOT SURE HOW TO REPRESENT IT.
 '''
-def my_full_cos_sim(data):
+def my_full_cos_sim(data): # pragma: no cover
     res = []
     for i in range(len(data)):
         new_line = []
@@ -74,14 +74,14 @@ def my_full_cos_sim(data):
 '''
  The same as np.dot(x,y) method.
 '''
-def sum_multi(x, y):
+def sum_multi(x, y): # pragma: no cover
     up_value = 0
     for i in range(len(x)):
         up_value += x[i] * y[i]
     return up_value
 
 # returns average val from non null values in vector.
-def get_average(x):
+def get_average(x): # pragma: no cover
     amount = 0
     sum = 0
     for i in range(len(x)):
@@ -103,7 +103,7 @@ def get_average(x):
  3. Решение: Расчитывать матрицу косинусов только после проверки матрицы на пользователей с полностью нулевыми полями оценок.
  4. Решение 2: Для нулевых матриц возвращать nan. 
 '''
-def my_cosine_sim_test(x, y):
+def my_cosine_sim_test(x, y): # pragma: no cover
     up_value = 0
     down_value = 1
     up_value = sum_multi(x, y)    
@@ -117,12 +117,12 @@ def my_cosine_sim_test(x, y):
 Calculates cosine simularity
 (Angle between vectors x and y.)
 '''
-def my_cosine_sim(x, y):
+def my_cosine_sim(x, y): # pragma: no cover
     return np.dot(x, y) / (np.sqrt(np.dot(x, x)) * np.sqrt(np.dot(y, y)))
 
 # DEFAULT STUFF ---------------------------------------------------------------------------------------------------------------------------------
 
-def pinfo(x, up=True, down=True, text='debug info:'):    
+def pinfo(x, up=True, down=True, text='debug info:'): # pragma: no cover  
     if up:
         print(f'-----------------text:{text}-------------------------------|')
     print(x)
@@ -135,7 +135,7 @@ def pinfo(x, up=True, down=True, text='debug info:'):
  - matrix should be square;
  - returns 2-d matrix without zeros strings.
 '''
-def remove_null_vectors(data):    
+def remove_null_vectors(data): # pragma: no cover
     zeros_vector = np.zeros(len(data[0]))
     result = np.array([string for string in data if not np.all(string==zeros_vector) ])
     return result

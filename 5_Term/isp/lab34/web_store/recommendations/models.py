@@ -11,7 +11,7 @@ from django.dispatch import receiver
 from first_app.models import Product
 from orders.models import OrderItem
 
-class StatisticsItem(models.Model):
+class StatisticsItem(models.Model): # pragma: no cover
     '''
     - Сохраняет статистику пользователя на сайте.
     - Создается/Удаляется автоматически при создании/удалении пользователя   
@@ -92,7 +92,7 @@ def add_new_product_to_all_statistics_items(sender, instance, created, **kwargs)
         StatisticsItem.add_new_product(product=instance)
 
 # OrderItem addin.
-@receiver(post_save, sender=OrderItem)
+@receiver(post_save, sender=OrderItem) # pragma: no cover
 def add_times_was_in_orders(sender, instance, created, **kwargs):
     if created:     
         if instance.order.user != None:

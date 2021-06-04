@@ -3,3 +3,4 @@ __pycache__
 web_store/debug.log
 .coverage
 migrations
+htmlcov

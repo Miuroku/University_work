@@ -3,7 +3,7 @@ import threading
 '''
     Just adds a function to a pool of threads and starts it.
 '''
-class ThreadManager():
+class ThreadManager(): # pragma: no cover
     all_threads = []
 
     def add(self, our_function, *args, **kwargs):

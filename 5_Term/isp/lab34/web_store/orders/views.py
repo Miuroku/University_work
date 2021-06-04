@@ -6,7 +6,7 @@ from cart.cart import Cart
 import concurrent.futures
 
 
-def order_create(request):
+def order_create(request): # pragma: no cover
     # 1) Берем текущую карзину или создаем пустую если её нет.
     cart = Cart(request)
 
@@ -53,7 +53,7 @@ def order_create(request):
         return render(request, 'orders/order/create.html', {'cart': cart, 'form': form})
 
 
-def order_specific(request, order_id):
+def order_specific(request, order_id): # pragma: no cover
     '''
     Даже аноним сможет получить эту информацию
     '''
@@ -74,7 +74,7 @@ def order_specific(request, order_id):
     return render(request, 'orders/order/order.html', context)
 
 
-def order_all(request):
+def order_all(request): # pragma: no cover
     '''
     Даже аноним сможет получить эту информацию
     '''    

@@ -1,7 +1,5 @@
-from django.urls import path
+from django.urls import path # pragma: no cover
 
 # Можно прописать обработчик путей для конкретно этого приложения. 
 
-urlpatterns = [
-    
-]
+urlpatterns = [] # pragma: no cover

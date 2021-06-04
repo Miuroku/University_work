@@ -4,13 +4,13 @@ from recommendations.models import StatisticsItem
 import numpy as np
 
 ''' Вспомогательный класс для вывода инфы из матрицы в django-модель'''
-class product_with_prediction(object):
+class product_with_prediction(object): # pragma: no cover
     def __init__(self, prediction_obj, product):
         self.pred_obj = prediction_obj
         self.product = product
 
 ''' Adapter class for for correct converting data form django DB to recommendations app and back '''
-class Recomendations_Django_Adapter(object):
+class Recomendations_Django_Adapter(object): # pragma: no cover
 
     def __init__(self):
         self.DEBUG = False  

@@ -38,3 +38,8 @@ class CouponModelTest(TestCase):
         coupon = Coupon.objects.get(pk=1)
         default = coupon._meta.get_field('active').default
         self.assertEquals(default, False)
+
+    def test_string_is_code(self):
+        coupon = Coupon.objects.get(pk=1)
+        string = coupon.__str__()
+        self.assertEquals('qwerty123456__aba', string)
