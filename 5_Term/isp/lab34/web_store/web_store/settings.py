@@ -99,16 +99,30 @@ WSGI_APPLICATION = 'web_store.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 # Data loaded from ../my_config.py.
+
+# For docker.
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': my_config.DATABASES_NAME,
-        'USER': my_config.DATABASES_USER,
-        'PASSWORD': my_config.DATABASES_PASSWORD,
-        'HOST': my_config.DATABASES_HOST,
-        'PORT': my_config.DATABASES_PORT,
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'db',        
+        'PORT': 5432,
     }
 }
+
+# For local server.
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': my_config.DATABASES_NAME,
+#         'USER': my_config.DATABASES_USER,
+#         'PASSWORD': my_config.DATABASES_PASSWORD,
+#         'HOST': my_config.DATABASES_HOST,        
+#         'PORT': my_config.DATABASES_PORT,
+#     }
+# }
 
 
 # Password validation
