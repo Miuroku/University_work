@@ -1,6 +1,6 @@
 # Интернет магазин на Django
 
-Для запуска проекта необходимо: 
+Для запуска проекта необходимо:
 0)  Copy project :
     $ git clone https://github.com/Miuroku/university_work/tree/master/5_Term/isp/lab34 
 
