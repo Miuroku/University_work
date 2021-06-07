@@ -1,7 +1,7 @@
-#!usr/bin/python3
+#!/usr/bin/python
 import logging
 import argparse
-from factory.serializer_factory import create_serializer
+from serializer.factory.serializer_factory import create_serializer
 
 logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S', level=logging.INFO)
 
