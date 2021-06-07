@@ -1,0 +1,64 @@
+#!usr/bin/python3
+import logging
+import argparse
+from factory.serializer_factory import create_serializer
+
+logging.basicConfig(format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S', level=logging.INFO)
+
+# That parser is a part of console utility.
+parser = argparse.ArgumentParser(description="Console serializer")
+
+# First argument 'file path 1'.
+parser.add_argument('first_file', type=str, help='Enter the name of file to convert from')
+
+# Second argument 'file path 2'.
+parser.add_argument('second_file', type=str, help='Enter the name of file to convert to')
+
+
+def get_ext(file_name: str):
+    return file_name.split('.')[-1]
+
+
+def get_directory(path):
+    return path[:path.rfind('/')+1]
+
+
+def make_convertion(file_from, file_to):
+    # get extensions of files.
+    f1_ext = get_ext(file_from)
+    f2_ext = get_ext(file_to)
+    if f1_ext == f2_ext:
+        pass
+    else:
+        try:
+            serializer_1 = create_serializer(f1_ext)
+            serializer_2 = create_serializer(f2_ext)
+        # Check if that extensions are available.        
+        except ValueError as e:
+            logging.info(e)
+        except OSError:
+            logging.error("File access error")
+        except Exception as e:
+            logging.info(f'Unexpected behavior!\n{e}')
+            return
+
+        try:
+            getted_object = serializer_1.load(file_from, False)
+            serializer_2.dump(getted_object, file_to, False)
+        except ValueError as e:
+            logging.error(f"{e}")
+        except Exception as e:
+            logging.error(f'Unexpected behavior!\n{e}')
+
+# Main part of module.
+# Get arguments from user.
+args = parser.parse_args()
+
+
+logging.info("Conversion starts ...\n")
+logging.info(f"Converting file:\t {args.first_file}\nto\nfile:\t {args.second_file}.")
+
+# Main function/action of module.
+convert(args.first_file, args.second_file)
+
+logging.info("Conversion ended.")
