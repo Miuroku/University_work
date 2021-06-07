@@ -34,7 +34,7 @@ class PickleSerializer(BaseSerializer):
                 try:
                     raw_obj = PickleSerializer.base_loads(file.read())
                 except Exception:
-                    raise ValueError('Invalid json format...')
+                    raise ValueError('Invalid pickle format...')
 
             if unpack:
                 return Unpacker().from_dict_to_object(raw_obj)
@@ -43,11 +43,11 @@ class PickleSerializer(BaseSerializer):
         else:
             raise ValueError("File not found.")
 
-    def loads(self, json: str) -> Any:        
+    def loads(self, format_string: str) -> Any:        
         try:
-            raw_obj = PickleSerializer.base_loads(json)
+            raw_obj = PickleSerializer.base_loads(format_string)
         except Exception:
-            raise ValueError('Invalid json format...')
+            raise ValueError('Invalid pickle format...')
 
         unpacked_obj = Unpacker().from_dict_to_object(raw_obj)
         return unpacked_obj

@@ -34,7 +34,7 @@ class TomlSerializer(BaseSerializer):
                 try:
                     raw_obj = TomlSerializer.base_loads(file.read())
                 except Exception:
-                    raise ValueError('Invalid json format...')
+                    raise ValueError('Invalid toml format...')
 
             if unpack:
                 return Unpacker().from_dict_to_object(raw_obj)
@@ -43,11 +43,11 @@ class TomlSerializer(BaseSerializer):
         else:
             raise ValueError("File not found.")
 
-    def loads(self, json: str) -> Any:        
+    def loads(self, format_string: str) -> Any:        
         try:
-            raw_obj = TomlSerializer.base_loads(json)
+            raw_obj = TomlSerializer.base_loads(format_string)
         except Exception:
-            raise ValueError('Invalid json format...')
+            raise ValueError('Invalid toml format...')
 
         unpacked_obj = Unpacker().from_dict_to_object(raw_obj)
         return unpacked_obj
