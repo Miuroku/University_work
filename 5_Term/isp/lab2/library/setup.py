@@ -2,12 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='serializer_lib',
-    packages=[
-        'Serializer',
-        'Serializer/factory',
-        'Serializer/objects_packager',
-        'Serializer/serializers'        
-    ],
+    packages=find_packages(),
     version='0.1.0',
     description='Library for serialization/deserialization',
     author='Miuroku Turoma',
