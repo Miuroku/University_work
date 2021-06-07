@@ -1,9 +1,7 @@
-#import warnings
+from library.serializer.objects_packager.packer_unpacker import Packer, Unpacker
+from library.serializer.serializers.base_serializer import BaseSerializer
 from yaml import dump, load
-from objects_packager.packer_unpacker import Packer, Unpacker
-from serializers.base_serializer import BaseSerializer
 
-#warnings.filterwarnings("ignore")
 
 class YamlSerializer(BaseSerializer):
     base_dumps = dump

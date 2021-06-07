@@ -1,12 +1,11 @@
 from typing import Any
-from serializers.base_serializer import BaseSerializer
-from objects_packager.packer_unpacker import Packer, Unpacker
+from library.serializer.serializers.base_serializer import BaseSerializer
+from library.serializer.objects_packager.packer_unpacker import Packer, Unpacker
 from json import dumps, loads
-
 
 class JsonSerializer(BaseSerializer):
     base_dumps = dumps
-    base_loads = loads
+    base_loads = loads 
 
     # 'pack' parameter is useful when we use utility.
     def dump(self, obj: object, file: object = None, pack=True) -> None:        
@@ -33,8 +32,8 @@ class JsonSerializer(BaseSerializer):
             with open(file, 'r') as file:
                 try:
                     raw_obj = JsonSerializer.base_loads(file.read())
-                except Exception:
-                    raise ValueError('Invalid json format...')
+                except Exception as e:
+                    raise ValueError(f'Invalid json format...\n{e}')
 
             if unpack:
                 return Unpacker().from_dict_to_object(raw_obj)

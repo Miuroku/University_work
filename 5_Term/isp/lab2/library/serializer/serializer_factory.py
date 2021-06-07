@@ -1,7 +1,7 @@
-from serializers.json_serializer import JsonSerializer
-from serializers.yaml_serializer import YamlSerializer
-from serializers.pickle_serializer import PickleSerializer
-from serializers.toml_serializer import TomlSerializer
+from library.serializer.serializers.json_serializer import JsonSerializer
+from library.serializer.serializers.yaml_serializer import YamlSerializer
+from library.serializer.serializers.pickle_serializer import PickleSerializer
+from library.serializer.serializers.toml_serializer import TomlSerializer
 
 serializers = {
     'json': JsonSerializer,

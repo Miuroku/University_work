@@ -3,7 +3,7 @@ from datetime import datetime
 from sys import builtin_module_names
 from sys import modules
 from types import FunctionType, CodeType
-from objects_packager.basic_functions import *
+from library.serializer.objects_packager.basic_functions import *
 
 
 class Packer:

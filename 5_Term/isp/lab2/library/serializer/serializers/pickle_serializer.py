@@ -1,6 +1,6 @@
 from typing import Any
-from serializers.base_serializer import BaseSerializer
-from objects_packager.packer_unpacker import Packer, Unpacker
+from library.serializer.serializers.base_serializer import BaseSerializer
+from library.serializer.objects_packager.packer_unpacker import Packer, Unpacker
 from pickle import dumps, loads
 
 
