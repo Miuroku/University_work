@@ -1,0 +1,46 @@
+"""
+This module contains BaseSerializer interface.
+"""
+
+
+from abc import ABC, abstractmethod
+
+
+
+class BaseSerializer(ABC):
+    """
+    Serializer interface.
+    """
+    
+    @abstractmethod
+    def dump(self, obj, fp):
+        """
+        Serialize object and put the result to file.
+        """
+        if fp is None:
+            raise ValueError("Invalid file format...")
+
+
+    @abstractmethod
+    def dumps(self, obj):
+        """
+        Returns string with serialized object.
+        """
+        pass
+
+
+    @abstractmethod
+    def load(self, fp):
+        """
+        Returns parsed object and data from the file.
+        """
+        if fp is None:
+            raise ValueError("Invalid file format ...")
+
+
+    @abstractmethod
+    def loads(self, s):
+        """
+        Returns parsed object and data from the string.
+        """
+        pass
