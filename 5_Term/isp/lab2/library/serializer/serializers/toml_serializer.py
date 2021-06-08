@@ -1,8 +1,8 @@
 from typing import Any
 from library.serializer.serializers.base_serializer import BaseSerializer
 from library.serializer.objects_packager.packer_unpacker import Packer, Unpacker
-from toml import dumps, loads
-
+#from toml import dumps, loads
+from library.serializer.parsers.toml_parser import dump, dumps, load, loads
 
 class TomlSerializer(BaseSerializer):
     base_dumps = dumps
@@ -10,44 +10,14 @@ class TomlSerializer(BaseSerializer):
 
     # 'pack' parameter is useful when we use utility.
     def dump(self, obj: object, file: object = None, pack=True) -> None:        
-
-        if pack:
-            packed_obj = Packer().from_object_to_dictionary(obj)            
-        else:
-            packed_obj = obj        
-
-        # Check if file exists.
-        if file:
-            with open(file, 'w') as file:
-                file.write(TomlSerializer.base_dumps(packed_obj))
-        else:
-            raise ValueError("File transfer aborted")
+        dump(obj, file)
 
     def dumps(self, obj: object) -> None:        
-        packed_obj = Packer().from_object_to_dictionary(obj)
-        return TomlSerializer.base_dumps(packed_obj)
+        dumps(obj)
 
     # 'unpack' parameter is useful when we use utility.
     def load(self, file: object, unpack=True) -> Any:
-        if file:
-            with open(file, 'r') as file:
-                try:
-                    raw_obj = TomlSerializer.base_loads(file.read())
-                except Exception:
-                    raise ValueError('Invalid toml format...')
-
-            if unpack:
-                return Unpacker().from_dict_to_object(raw_obj)
-            else:
-                return raw_obj
-        else:
-            raise ValueError("File not found.")
+        load(file)
 
     def loads(self, format_string: str) -> Any:        
-        try:
-            raw_obj = TomlSerializer.base_loads(format_string)
-        except Exception:
-            raise ValueError('Invalid toml format...')
-
-        unpacked_obj = Unpacker().from_dict_to_object(raw_obj)
-        return unpacked_obj
+        loads(temp_str)

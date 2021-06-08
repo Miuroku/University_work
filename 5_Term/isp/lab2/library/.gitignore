@@ -1,3 +1,5 @@
 build
 dist
 serializer_lib.egg*
+run_test*
+data_for_tests*

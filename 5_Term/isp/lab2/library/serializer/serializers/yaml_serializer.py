@@ -1,11 +1,15 @@
 from library.serializer.objects_packager.packer_unpacker import Packer, Unpacker
 from library.serializer.serializers.base_serializer import BaseSerializer
-from yaml import dump, load
+#from yaml import dump, load
+from library.serializer.parsers.yaml_parser import to_yaml, from_yaml, serialize, deserialize
 
 
 class YamlSerializer(BaseSerializer):
-    base_dumps = dump
-    base_loads = load
+    # base_dumps = dump
+    # base_loads = load    
+
+    base_dumps = to_yaml
+    base_loads = from_yaml
 
     def dump(self, obj: object, file: object = None, pack=True):        
         if pack:

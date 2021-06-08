@@ -1,0 +1,294 @@
+'.META': 
+  '1861986415376': 
+    '.code': 
+      'co_argcount': 1
+      'co_posonlyargcount': 0
+      'co_kwonlyargcount': 0
+      'co_nlocals': 1
+      'co_stacksize': 2
+      'co_flags': 67
+      'co_code': 
+        - 100
+        - 1
+        - 124
+        - 0
+        - 95
+        - 0
+        - 100
+        - 0
+        - 83
+        - 0
+      'co_consts': 
+        '.list': 
+          - null
+          - 10
+        '.collection_type': 'tuple'
+      'co_names': 
+        '.list': 
+          - 'b'
+        '.collection_type': 'tuple'
+      'co_varnames': 
+        '.list': 
+          - 'self'
+        '.collection_type': 'tuple'
+      'co_freevars': 
+        '.list': []
+        '.collection_type': 'tuple'
+      'co_cellvars': 
+        '.list': []
+        '.collection_type': 'tuple'
+      'co_filename': 'C:\\Users\\supay\\Desktop\\University_work\\5_Term\\isp\\lab2\\tests\\data_for_tests.py'
+      'co_name': '__init__'
+      'co_firstlineno': 22
+      'co_lnotab': 
+        - 0
+        - 1
+    '.metatype': 'func'
+    '.name': '__init__'
+    '.module': 'tests.data_for_tests'
+    '.refs': 
+      '.list': 
+        - {}
+        - {}
+        - {}
+        - '.list': 
+            - 'b'
+          '.collection_type': 'set'
+      '.collection_type': 'tuple'
+    '.defaults': null
+  '1861964858704': 
+    '.metatype': 'class'
+    '.name': 'example_class_1'
+    '.module': 'tests.data_for_tests'
+    '.class': 
+      'mro': 
+        - '.list': []
+          '.collection_type': 'tuple'
+        - null
+      'attrs': 
+        - '.list': 
+            - '__doc__'
+            - null
+            - 'data'
+          '.collection_type': 'tuple'
+        - '.list': 
+            - '__init__'
+            - '.metaid': '1861986415376'
+            - 'method'
+          '.collection_type': 'tuple'
+        - '.list': 
+            - '__module__'
+            - 'tests.data_for_tests'
+            - 'data'
+          '.collection_type': 'tuple'
+        - '.list': 
+            - 'a'
+            - 2
+            - 'data'
+          '.collection_type': 'tuple'
+        - '.list': 
+            - 'c'
+            - 'added new field to the class'
+            - 'data'
+          '.collection_type': 'tuple'
+  '1861986415520': 
+    '.code': 
+      'co_argcount': 2
+      'co_posonlyargcount': 0
+      'co_kwonlyargcount': 0
+      'co_nlocals': 2
+      'co_stacksize': 2
+      'co_flags': 3
+      'co_code': 
+        - 116
+        - 0
+        - 131
+        - 0
+        - 160
+        - 1
+        - 161
+        - 0
+        - 1
+        - 0
+        - 116
+        - 2
+        - 124
+        - 1
+        - 131
+        - 1
+        - 124
+        - 0
+        - 106
+        - 3
+        - 23
+        - 0
+        - 124
+        - 0
+        - 95
+        - 4
+        - 100
+        - 0
+        - 83
+        - 0
+      'co_consts': 
+        '.list': 
+          - null
+        '.collection_type': 'tuple'
+      'co_names': 
+        '.list': 
+          - 'super'
+          - '__init__'
+          - 'str'
+          - 'c'
+          - 'e'
+        '.collection_type': 'tuple'
+      'co_varnames': 
+        '.list': 
+          - 'self'
+          - 's'
+        '.collection_type': 'tuple'
+      'co_freevars': 
+        '.list': 
+          - '__class__'
+        '.collection_type': 'tuple'
+      'co_cellvars': 
+        '.list': []
+        '.collection_type': 'tuple'
+      'co_filename': 'C:\\Users\\supay\\Desktop\\University_work\\5_Term\\isp\\lab2\\tests\\data_for_tests.py'
+      'co_name': '__init__'
+      'co_firstlineno': 32
+      'co_lnotab': 
+        - 0
+        - 1
+        - 10
+        - 1
+    '.metatype': 'func'
+    '.name': '__init__'
+    '.module': 'tests.data_for_tests'
+    '.refs': 
+      '.list': 
+        - '__class__': 
+            '.metaid': '1861964859648'
+        - {}
+        - 'super': 
+            '.metatype': 'builtin'
+            '.builtin': 'super'
+          'str': null
+        - '.list': 
+            - 'c'
+            - 'e'
+            - '__init__'
+          '.collection_type': 'set'
+      '.collection_type': 'tuple'
+    '.defaults': null
+  '1861986415664': 
+    '.code': 
+      'co_argcount': 1
+      'co_posonlyargcount': 0
+      'co_kwonlyargcount': 0
+      'co_nlocals': 3
+      'co_stacksize': 2
+      'co_flags': 67
+      'co_code': 
+        - 100
+        - 1
+        - 125
+        - 1
+        - 100
+        - 2
+        - 125
+        - 2
+        - 124
+        - 1
+        - 124
+        - 2
+        - 23
+        - 0
+        - 83
+        - 0
+      'co_consts': 
+        '.list': 
+          - null
+          - 'i'm doing something...'
+          - 'other string'
+        '.collection_type': 'tuple'
+      'co_names': 
+        '.list': []
+        '.collection_type': 'tuple'
+      'co_varnames': 
+        '.list': 
+          - 'self'
+          - 'one'
+          - 'two'
+        '.collection_type': 'tuple'
+      'co_freevars': 
+        '.list': []
+        '.collection_type': 'tuple'
+      'co_cellvars': 
+        '.list': []
+        '.collection_type': 'tuple'
+      'co_filename': 'C:\\Users\\supay\\Desktop\\University_work\\5_Term\\isp\\lab2\\tests\\data_for_tests.py'
+      'co_name': 'some_class_func'
+      'co_firstlineno': 36
+      'co_lnotab': 
+        - 0
+        - 1
+        - 4
+        - 1
+        - 4
+        - 1
+    '.metatype': 'func'
+    '.name': 'some_class_func'
+    '.module': 'tests.data_for_tests'
+    '.refs': 
+      '.list': 
+        - {}
+        - {}
+        - {}
+        - '.list': []
+          '.collection_type': 'set'
+      '.collection_type': 'tuple'
+    '.defaults': null
+  '1861964859648': 
+    '.metatype': 'class'
+    '.name': 'example_class_2'
+    '.module': 'tests.data_for_tests'
+    '.class': 
+      'mro': 
+        - '.list': 
+            - '.metaid': '1861964858704'
+          '.collection_type': 'tuple'
+        - null
+      'attrs': 
+        - '.list': 
+            - '__doc__'
+            - null
+            - 'data'
+          '.collection_type': 'tuple'
+        - '.list': 
+            - '__init__'
+            - '.metaid': '1861986415520'
+            - 'method'
+          '.collection_type': 'tuple'
+        - '.list': 
+            - '__module__'
+            - 'tests.data_for_tests'
+            - 'data'
+          '.collection_type': 'tuple'
+        - '.list': 
+            - 'a'
+            - 2
+            - 'data'
+          '.collection_type': 'tuple'
+        - '.list': 
+            - 'c'
+            - 'added new field to the class'
+            - 'data'
+          '.collection_type': 'tuple'
+        - '.list': 
+            - 'some_class_func'
+            - '.metaid': '1861986415664'
+            - 'method'
+          '.collection_type': 'tuple'
+'.OBJ': 
+  '.metaid': '1861964859648'
