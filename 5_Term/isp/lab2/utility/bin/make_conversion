@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!venv/bin/python3
 import logging
 import argparse
 from serializer.factory.serializer_factory import create_serializer
