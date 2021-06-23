@@ -18,8 +18,6 @@ services:
        python ./web_store/manage.py migrate &&       
        python ./web_store/manage.py loaddata ./web_store/web_store/fixtures/initial_data.json &&       
        python ./web_store/manage.py runserver 0.0.0.0:8000"
-    volumes:
-      - .:/code
     ports:
       - "8000:8000"
     depends_on:
