@@ -10,9 +10,9 @@ docker-compose -f docker-compose-prod.yml up --build
 ```
 
 **Second way** <br>
-0)  Copy project <br>
-1) Change file 'web-store/my_config.py' и занести туда настройки почты. <br>
-2) Run docker container : <br>
+1) Copy project <br>
+2) Change file 'web-store/my_config.py' и занести туда настройки почты. <br>
+3) Run docker container : <br>
     ```sh
     docker-compose -f docker-compose.yml up --build
     ```
