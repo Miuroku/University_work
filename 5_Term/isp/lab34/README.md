@@ -18,5 +18,6 @@ docker-compose -f docker-compose-prod.yml up --build
     ```
 <br>
 
+<hr>
 - image from Docker-hub : https://hub.docker.com/r/miuroku/lab34_web
 
