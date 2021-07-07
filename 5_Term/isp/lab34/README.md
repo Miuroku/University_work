@@ -3,7 +3,7 @@
 ## For run project locally : 
 
 **First way**
-1.Copy docker-compose-prod.yml
+<br>1.Copy docker-compose-prod.yml
 2.Run
 ```sh
 docker-compose -f docker-compose-prod.yml up --build
